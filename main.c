@@ -1,5 +1,6 @@
 #include <raylib.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 int min(x, y) {
     if (x > y) return y;
@@ -26,13 +27,16 @@ int main() {
         }
     }
 
-    bool running   = true;
+    bool running   = false;
     bool mode      = true;
     bool next      = false;
     bool text      = false;
     bool hideZeros = true;
     float frameTotal = 0.1f;
     float frameRemaining = frameTotal;
+
+    bool birthRules[9] =   {0, 0, 0, 1, 0, 0, 0, 0, 0};
+    bool surviveRules[9] = {0, 0, 1, 1, 0, 0, 0, 0, 0};
 
     while (!WindowShouldClose()) {
 
@@ -75,7 +79,8 @@ int main() {
         // Draw the cells
         for (int y = 0; y < cellCountVertical; ++y) {
             for (int x = 0; x < cellCountHorizontal; ++x) {
-                DrawRectangle(x * (cellWidth + cellPadding) + cellPadding, y * (cellHeight + cellPadding) + cellPadding, cellWidth, cellHeight, board[y][x] ? RED : BLACK);
+                DrawRectangle(x * (cellWidth + cellPadding) + cellPadding, y * (cellHeight + cellPadding) + cellPadding,
+                              cellWidth, cellHeight, board[y][x] ? (Color){(256 * y / cellCountVertical) % 256, (256 * (cellCountVertical - y - 1) / cellCountVertical) % 256, (256 * x / cellCountHorizontal) % 256, 255 } : BLACK);
             }
         }
 
@@ -97,9 +102,9 @@ int main() {
                 // Update next board to next iteration based on state of current board
                 if (frameRemaining <= 0 || next) {
                     if (board[y][x]) {
-                        if (count > 3 || count < 2) nextBoard[y][x] = false;
+                        nextBoard[y][x] = surviveRules[count];
                     } else {
-                        if (count == 3) nextBoard[y][x] = true;
+                        nextBoard[y][x] = birthRules[count];
                     }
                 }
 
