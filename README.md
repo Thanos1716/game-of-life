@@ -13,5 +13,5 @@ Compiled with raylib, `$gcc -lraylib main.c -o main`
 - [Right arrow] to skip to next frame whilst paused
 - [C] to clear screen of live cells
 - [F] to reset animation speed
-- [T] to toggle text
+- [T] to toggle text about adjacent cells
 - [Z] to toggle zeros in text mode
