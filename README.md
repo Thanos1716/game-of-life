@@ -1,6 +1,8 @@
 ## Game of Life
 Its the game of life, what more could you want?
 
+![Screen Shot 2021-06-22 at 7 05 13 pm](https://user-images.githubusercontent.com/80975570/122977154-f5f09900-d38c-11eb-891a-448d3cad37f3.png)
+
 **Dependencies**:
 - [raylib](https://www.raylib.com/)
 
