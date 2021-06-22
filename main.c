@@ -7,6 +7,14 @@ int min(x, y) {
     return x;
 }
 
+/* This function is a hacked together modulo operator that does what I want,
+rather than the standard % operator which acts as a remainder operator in c
+(which gets weird answers for negative numbers) */
+int mod(x, y) {
+    while (x <= 0) x += y;
+    return x % y;
+}
+
 int main() {
 
     // FILE *fpointer = fopen("test.txt", "w");
@@ -56,10 +64,9 @@ int main() {
     bool surviveRules[9] = {0, 0, 1, 1, 0, 0, 0, 0, 0};
 
     while (!WindowShouldClose()) {
-
         // Get the coordinates of the cell the mouse is closest to
-        int mouseX = (GetMouseX() - cellPadding / 2) / (cellWidth  + cellPadding);
-        int mouseY = (GetMouseY() - cellPadding / 2) / (cellHeight + cellPadding);
+        int mouseX = mod((GetMouseX() - cellPadding / 2) / (cellWidth  + cellPadding), cellCountHorizontal);
+        int mouseY = mod((GetMouseY() - cellPadding / 2) / (cellHeight + cellPadding), cellCountVertical);
 
         // Only on the first frame of left click set the mode to the opposite of the cells state
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) mode = !board[mouseY][mouseX];
