@@ -12,6 +12,7 @@ Compiled with raylib, `$gcc -lraylib main.c -o main`
 - [Up/down arrows] increase/decrease animation speed
 - [Right arrow] to skip to next frame whilst paused
 - [C] to clear screen of live cells
+- [W] to toggle edge wrapping
 - [F] to reset animation speed
 - [T] to toggle text about adjacent cells
 - [Z] to toggle zeros in text mode
