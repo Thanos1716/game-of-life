@@ -132,7 +132,8 @@ int main() {
                 // Draw number of adjacent live cells on cell
                 if (text && !(hideZeros && count == 0)) DrawText(TextFormat("%i",
                     count), x * (cellWidth + cellPadding) + cellPadding + cellWidth / 4,
-                    y * (cellHeight + cellPadding) + cellPadding, min(cellWidth, cellHeight), LIGHTGRAY); // cellwidth / 4 is arbitary, TODO: find better value
+                    y * (cellHeight + cellPadding) + cellPadding, min(cellWidth, cellHeight),
+                    board[y][x] ? (surviveRules[count] ? YELLOW : RED) : birthRules[count] ? GREEN : LIGHTGRAY); // cellwidth / 4 is arbitary, TODO: find better value
                 }
             }
 
@@ -142,14 +143,12 @@ int main() {
                 }
             }
 
-
         if (frameRemaining <= 0) frameRemaining = frameTotal;
 
         next = false;
 
         EndDrawing();
     }
-
     CloseWindow();
     return 0;
 }
